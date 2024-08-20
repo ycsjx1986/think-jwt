@@ -94,7 +94,7 @@ class Jwt
             // 解析传入的令牌,获取令牌中的数据和标识
             $arr = $this->Parse($token, 1);
             // 检查令牌的生效时间是否在当前时间之前,如果令牌尚未生效或已经过期,则抛出异常
-            if ($arr['nbf'] - time() >= $this->exp) {
+            if (time() - $arr['nbf'] >= $this->exp) {
                 throw new \Exception('token过期需要刷新', self::TOKEN_EXPIRE);
             }
             $json['code'] = 1;
